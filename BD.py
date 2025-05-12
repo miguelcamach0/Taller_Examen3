@@ -1,7 +1,7 @@
 class Base_datos:
     def __init__(self):
-        self.lista_datos = []
-        self.produccion_huevos = {}
+        self.lista_datos = []  # Lista para almacenar los pollos
+        self.produccion_huevos = {}  # Diccionario para almacenar la producción de huevos
 
     def guardar_pollo(self, codigo, raza, edad):
         self.lista_datos.append([codigo, raza, edad])
