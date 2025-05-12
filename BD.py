@@ -1,10 +1,10 @@
 class Base_datos:
     def __init__(self):
-        self.lista_datos = []  # Lista para almacenar los pollos
-        self.produccion_huevos = {}  # Diccionario para almacenar la producción de huevos
+        self.lista_datos = []  # Almacena los datos de los pollos
+        self.produccion_huevos = {}  # Almacena producción por código de pollo
 
-    def guardar_pollo(self, codigo, raza, edad):
-        self.lista_datos.append([codigo, raza, edad])
+    def agregar_pollo(self, pollo):
+        self.lista_datos.append(pollo)
 
     def actualizar_pollo(self, codigo, nueva_raza, nueva_edad):
         for pollo in self.lista_datos:
