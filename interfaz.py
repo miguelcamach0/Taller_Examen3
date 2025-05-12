@@ -1,11 +1,8 @@
-
-from Pollos import Pollo
-from BD import Base_datos
+from pollos import Pollo
 
 class Interfaz:
     def __init__(self):
-        self.lista_pollos = []
-        self.base_datos = Base_datos()  # Única instancia de base de datos
+        self.lista_pollos = []  # Lista de pollos registrados
 
     def mostrar_menu(self):
         while True:
@@ -36,23 +33,23 @@ class Interfaz:
             elif opcion == "7":
                 self.consultar_produccion_por_semana()
             elif opcion == "8":
-                print("👋 Hasta luego.")
+                print("Hasta luego.")
                 break
             else:
-                print("❌ Opción inválida.")
+                print("Opción inválida.")
 
     def crear_pollo(self):
         codigo = input("Código del pollo: ")
         raza = input("Raza: ")
         edad = input("Edad: ")
         pollo = Pollo(codigo, edad, raza)
-        self.base_datos.agregar_pollo([codigo, raza, edad])
+        pollo.guardar_pollo()
         self.lista_pollos.append(pollo)
-        print("✅ Pollo registrado.")
+        print("Pollo registrado.")
 
     def leer_pollos(self):
         if not self.lista_pollos:
-            print("⚠️ No hay pollos registrados.")
+            print("No hay pollos registrados.")
         else:
             for pollo in self.lista_pollos:
                 print(f"Código: {pollo.getCodigo_pollo()}, Raza: {pollo.getRaza_pollo()}, Edad: {pollo.getEdad_pollo()}")
@@ -65,44 +62,47 @@ class Interfaz:
                 nueva_edad = input("Nueva edad: ")
                 pollo.setRaza_pollo(nueva_raza)
                 pollo.setEdad_pollo(nueva_edad)
-                self.base_datos.actualizar_pollo(codigo, nueva_raza, nueva_edad)
-                print("🔁 Datos actualizados.")
+                pollo.objBase_datos.actualizar_pollo(codigo, nueva_raza, nueva_edad)
+                print("Datos actualizados.")
                 return
-        print("❌ Pollo no encontrado.")
+        print("Pollo no encontrado.")
 
     def eliminar_pollo(self):
         codigo = input("Código del pollo a eliminar: ")
         for i, pollo in enumerate(self.lista_pollos):
             if pollo.getCodigo_pollo() == codigo:
-                self.base_datos.eliminar_pollo(codigo)
+                pollo.objBase_datos.eliminar_pollo(codigo)
                 del self.lista_pollos[i]
-                print("🗑️ Pollo eliminado.")
+                print("Pollo eliminado.")
                 return
-        print("❌ No se encontró ese pollo.")
+        print("No se encontró ese pollo.")
 
     def registrar_produccion(self):
         codigo = input("Código del pollo: ")
         semana = input("Semana (ej: Semana 1): ")
-        try:
-            cantidad = int(input("Cantidad de huevos: "))
-        except ValueError:
-            print("❌ Cantidad inválida.")
-            return
+        cantidad = int(input("Cantidad de huevos: "))
         for pollo in self.lista_pollos:
             if pollo.getCodigo_pollo() == codigo:
-                self.base_datos.registrar_huevos(codigo, semana, cantidad)
-                print("✅ Producción registrada.")
+                pollo.objBase_datos.registrar_huevos(codigo, semana, cantidad)
+                print("Producción registrada.")
                 return
-        print("❌ Pollo no encontrado.")
+        print("Pollo no encontrado.")
 
     def consultar_produccion_total(self):
         codigo = input("Código del pollo: ")
-        total = self.base_datos.obtener_produccion_total(codigo)
-        print(f"🥚 Producción total de {codigo}: {total} huevos.")
+        for pollo in self.lista_pollos:
+            if pollo.getCodigo_pollo() == codigo:
+                total = pollo.objBase_datos.obtener_produccion_total(codigo)
+                print(f"Producción total de {codigo}: {total} huevos.")
+                return
+        print("Código inválido.")
 
     def consultar_produccion_por_semana(self):
         codigo = input("Código del pollo: ")
         semana = input("Semana a consultar: ")
-        cantidad = self.base_datos.obtener_produccion_por_semana(codigo, semana)
-        print(f"📅 En {semana}, {codigo} puso {cantidad} huevos.")
-
+        for pollo in self.lista_pollos:
+            if pollo.getCodigo_pollo() == codigo:
+                cantidad = pollo.objBase_datos.obtener_produccion_por_semana(codigo, semana)
+                print(f"En {semana}, {codigo} puso {cantidad} huevos.")
+                return
+        print("No se encontró ese pollo.")
