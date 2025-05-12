@@ -1,4 +1,4 @@
-from pollos import Pollo
+from Pollos import Pollo
 
 class Interfaz:
     def __init__(self):
