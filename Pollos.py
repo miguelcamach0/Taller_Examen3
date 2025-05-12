@@ -1,10 +1,14 @@
-class Pollo:
-    def __init__(self, id_pollo, edad_pollo, raza_pollo):
-        self.codigo_pollo = id_pollo
-        self.edad_pollo = edad_pollo
-        self.raza_pollo = raza_pollo
+from bd import Base_datos
 
-    # Métodos Get y Set
+class Pollo:
+    def __init__(self, id_pollo, dato_edad, raza_pollo):
+        # Atributos del pollo
+        self.codigo_pollo = id_pollo
+        self.edad_pollo = dato_edad
+        self.raza_pollo = raza_pollo
+        self.objBase_datos = Base_datos()  # Instancia de la base de datos
+
+    # Métodos para obtener y modificar atributos
     def getCodigo_pollo(self):
         return self.codigo_pollo
 
@@ -20,5 +24,9 @@ class Pollo:
     def getRaza_pollo(self):
         return self.raza_pollo
 
-    def setRaza_pollo(self, raza_pollo):
-        self.raza_pollo = raza_pollo
+    def setRaza_pollo(self, raza):
+        self.raza_pollo = raza
+
+    # Métodos para interactuar con la base de datos
+    def guardar_pollo(self):
+        self.objBase_datos.guardar_pollo(self.codigo_pollo, self.raza_pollo, self.edad_pollo)
