@@ -31,4 +31,3 @@ class Base_datos:
         if codigo in self.produccion_huevos and semana in self.produccion_huevos[codigo]:
             return self.produccion_huevos[codigo][semana]
         return 0
-
