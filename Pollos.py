@@ -2,7 +2,6 @@ from bd import Base_datos
 
 class Pollo:
     def __init__(self, id_pollo, dato_edad, raza_pollo):
-        # Atributos del pollo
         self.codigo_pollo = id_pollo
         self.edad_pollo = dato_edad
         self.raza_pollo = raza_pollo
