@@ -2,11 +2,11 @@ from Pollos import Pollo
 
 class Interfaz:
     def __init__(self):
-        self.lista_pollos = []  # Lista de pollos registrados
+        self.lista_pollos = []  # Lista de para los pollos registrados
 
     def mostrar_menu(self):
         while True:
-            print("\n=== MENÚ DE LA GRANJA ===")
+            print("\n... MENÚ DE LA GRANJA ...")
             print("1. Registrar nuevo pollo")
             print("2. Ver todos los pollos")
             print("3. Actualizar datos de un pollo")
