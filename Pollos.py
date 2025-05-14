@@ -5,9 +5,9 @@ class Pollo:
         self.codigo_pollo = id_pollo
         self.edad_pollo = dato_edad
         self.raza_pollo = raza_pollo
-        self.objBase_datos = Base_datos()  # Instancia de la base de datos
+        self.objBase_datos = Base_datos()  # objeto de la base de datos
 
-    # Métodos para obtener y modificar atributos
+    # metodo para que obtiene y modifica atibutos
     def getCodigo_pollo(self):
         return self.codigo_pollo
 
@@ -26,6 +26,6 @@ class Pollo:
     def setRaza_pollo(self, raza):
         self.raza_pollo = raza
 
-    # Métodos para interactuar con la base de datos
+    # Metodo con la base de datos
     def guardar_pollo(self):
         self.objBase_datos.guardar_pollo(self.codigo_pollo, self.raza_pollo, self.edad_pollo)
